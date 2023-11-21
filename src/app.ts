@@ -15,12 +15,24 @@ app.use(express.json());
 
 
 venom
-  .create({
-    session: 'session-name' //name of session
-  })
+  .create(
+    'henrique',
+    (base64Qr: string, asciiQR: any, attempts: any, urlCode: any) => {
+      console.log(asciiQR); // Optional to log the QR in the terminal
+           // Convertendo o QR code em base64
+           const base64QR = base64Qr.split(',')[1]; // Obtendo apenas a parte base64
+
+           // Use o base64QR como necessário, por exemplo, retornando-o como resposta de uma API
+          //  base = base64Qr;
+          console.log(base64QR);
+
+    },
+    undefined,
+    { logQR: true }
+  )
   .then((client: any) => {
-    clientVenom = client;
-    console.log("Conectado")
+    clientVenom = client
+    console.log("Conectado");
   })
   .catch((erro: any) => {
     console.log(erro);
