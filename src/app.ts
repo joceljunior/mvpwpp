@@ -14,29 +14,29 @@ let clientVenom: any;
 app.use(express.json());
 
 
-venom
-  .create(
-    'henrique',
-    (base64Qr: string, asciiQR: any, attempts: any, urlCode: any) => {
-      console.log(asciiQR); // Optional to log the QR in the terminal
-           // Convertendo o QR code em base64
-           const base64QR = base64Qr.split(',')[1]; // Obtendo apenas a parte base64
+// venom
+//   .create(
+//     'henrique',
+//     (base64Qr: string, asciiQR: any, attempts: any, urlCode: any) => {
+//       console.log(asciiQR); // Optional to log the QR in the terminal
+//            // Convertendo o QR code em base64
+//            const base64QR = base64Qr.split(',')[1]; // Obtendo apenas a parte base64
 
-           // Use o base64QR como necessário, por exemplo, retornando-o como resposta de uma API
-          //  base = base64Qr;
-          console.log(base64QR);
+//            // Use o base64QR como necessário, por exemplo, retornando-o como resposta de uma API
+//           //  base = base64Qr;
+//           console.log(base64QR);
 
-    },
-    undefined,
-    { logQR: true }
-  )
-  .then((client: any) => {
-    clientVenom = client
-    console.log("Conectado");
-  })
-  .catch((erro: any) => {
-    console.log(erro);
-  });
+//     },
+//     undefined,
+//     { logQR: true }
+//   )
+//   .then((client: any) => {
+//     clientVenom = client
+//     console.log("Conectado");
+//   })
+//   .catch((erro: any) => {
+//     console.log(erro);
+//   });
 
   
 
@@ -59,35 +59,34 @@ app.post('/sendMessage',  (req: Request, res: Response) => {
   }
 });
 
-// app.get('/getQrCode', (req: Request, res: Response) => {
-//   var base = "";
-//   // clientVenom.close();
-//   venom
-//   .create(
-//     'henrique',
-//     (base64Qr: string, asciiQR: any, attempts: any, urlCode: any) => {
-//       console.log(asciiQR); // Optional to log the QR in the terminal
-//            // Convertendo o QR code em base64
-//            const base64QR = base64Qr.split(',')[1]; // Obtendo apenas a parte base64
+app.get('/getQrCode', (req: Request, res: Response) => {
+  var base = "";
+  venom
+  .create(
+    'henrique',
+    (base64Qr: string, asciiQR: any, attempts: any, urlCode: any) => {
+      console.log(asciiQR); // Optional to log the QR in the terminal
+           // Convertendo o QR code em base64
+           const base64QR = base64Qr.split(',')[1]; // Obtendo apenas a parte base64
 
-//            // Use o base64QR como necessário, por exemplo, retornando-o como resposta de uma API
-//            base = base64Qr;
-//            res.json(base);
+           // Use o base64QR como necessário, por exemplo, retornando-o como resposta de uma API
+           base = base64Qr;
+           res.json(base);
 
-//     },
-//     undefined,
-//     { logQR: true }
-//   )
-//   .then((client: any) => {
-//     clientVenom = client
-//     console.log("Conectado");
-//   })
-//   .catch((erro: any) => {
-//     console.log(erro);
-//   });
+    },
+    undefined,
+    { logQR: true }
+  )
+  .then((client: any) => {
+    clientVenom = client
+    console.log("Conectado");
+  })
+  .catch((erro: any) => {
+    console.log(erro);
+  });
   
   
-// });
+});
 
 
 app.listen(port, () => {
