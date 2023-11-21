@@ -57,6 +57,8 @@ app.post('/sendMessage',  (req: Request, res: Response) => {
   for (const message of messages) {
       sendMessage(message.to, message.message);
   }
+  
+  res.json(true);
 });
 
 app.get('/getQrCode', (req: Request, res: Response) => {
