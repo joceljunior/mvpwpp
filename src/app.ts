@@ -28,7 +28,6 @@ venom
 
   
 
-
  function sendMessage(to: string, message: string) {
    clientVenom
     .sendText(to + '@c.us', message)
